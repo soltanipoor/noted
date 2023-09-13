@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "Estedad";
+  src: url(./assets/Fonts/Estedad-Regular.woff2);
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: "Estedad";
+  direction: rtl;
+}
+
+button {
+  font-family: inherit;
+}

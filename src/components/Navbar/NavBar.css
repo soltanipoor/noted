@@ -1,0 +1,93 @@
+#nav-bar {
+  flex-basis: 20%;
+  background-color: #f8eee2;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+#nav-bar > header {
+  padding: 30px 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search-button {
+  border: none;
+  background: none;
+  margin-right: auto;
+}
+
+.new-note-button {
+  width: 100%;
+  border: none;
+  display: flex;
+  color: white;
+  padding: 10px;
+  border-radius: 3px;
+  align-items: center;
+  justify-content: center;
+  background: #d9614c;
+  margin-top: 30px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  gap: 8px;
+}
+
+.last-notes-container h2 {
+  text-align: right;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 150% */
+  padding: 0 20px;
+}
+
+.last-notes {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  align-self: stretch;
+}
+
+.folders-container header {
+  display: flex;
+  padding: 0px 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.folders-container header h2 {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.new-folder-button {
+  border: none;
+  background: none;
+}
+
+
+.nav-bar-item {
+  display: flex;
+  padding: 10px 20px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+  align-self: stretch;
+
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 21px;
+}
+
+.nav-bar-item--selected {
+  background: #FFFBFA;
+}
