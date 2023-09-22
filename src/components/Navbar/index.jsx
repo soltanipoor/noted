@@ -2,8 +2,8 @@ import Logo from "@/assets/images/logo.svg";
 import PlusIcon from "@/assets/images/icons/plus.svg";
 import SearchIcon from "@/assets/images/icons/search.svg";
 
-import Folders from "../Folders";
-import LastNotes from "../LastNotes";
+import NavbarFolders from "./NavbarFolders";
+import NavbarLastNotes from "./NavbarLastNotes";
 
 import "./NavBar.css";
 
@@ -22,9 +22,9 @@ function NavBar() {
         </button>
       </header>
 
-      <LastNotes />
+      <NavbarLastNotes />
 
-      <Folders />
+      <NavbarFolders />
     </div>
   );
 }
