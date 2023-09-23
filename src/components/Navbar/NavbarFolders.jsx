@@ -3,6 +3,7 @@ import NewFolderIcon from "@/assets/images/icons/new-folder.svg";
 import OpenFolderIcon from "@/assets/images/icons/open-folder.svg";
 import NavBarItem from "./NavBarItem";
 import { useState } from "react";
+import Button from "../UI/Button";
 
 const initialFolders = [
   {
@@ -37,8 +38,8 @@ function Folders() {
 
   const handleCreateFolder = () => {
     setFolders([{ name: newFolderValue }, ...folders]);
-    setNewFolderValue(null)
-    setIsShowNewFolder(false)
+    setNewFolderValue(null);
+    setIsShowNewFolder(false);
   };
 
   const handleChangeInput = (event) => {
@@ -56,18 +57,20 @@ function Folders() {
 
       <div className="folders">
         {isShowNewFolder && (
-          <div className="nav-bar-new-folder">
+          <form className="nav-bar-new-folder" onSubmit={handleCreateFolder}>
             <img src={folderIcon} />
-
             <input
               type="text"
               placeholder="نام پوشه"
               onChange={handleChangeInput}
             />
-
-            <button onClick={handleCreateFolder}>ok</button>
-            <button onClick={handleCancelNewFolder}>cancel</button>
-          </div>
+            <Button variant="blue" type="submit">
+              ok
+            </Button>
+            <Button onClick={handleCancelNewFolder} variant="red">
+              cancel
+            </Button>
+          </form>
         )}
 
         {folders.map((item, i) => (
