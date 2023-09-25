@@ -2,7 +2,7 @@ import folderIcon from "@/assets/images/icons/folder.svg";
 import NewFolderIcon from "@/assets/images/icons/new-folder.svg";
 import OpenFolderIcon from "@/assets/images/icons/open-folder.svg";
 import NavBarItem from "./NavBarItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../UI/Button";
 
 const initialFolders = [
@@ -46,6 +46,26 @@ function Folders() {
     setNewFolderValue(event.target.value);
   };
 
+  useEffect(() => {
+    const handleClick = (event) => {
+      const isClickInForm = event.target.closest(
+        ".nav-bar-new-folder,header"
+      );
+
+      if (!isClickInForm) {
+        setIsShowNewFolder(false);
+      }
+    }
+
+    if (isShowNewFolder) {
+      document.body.addEventListener("click", handleClick);
+    }
+
+    return () => {
+      document.body.removeEventListener("click", handleClick)
+    }
+  }, [isShowNewFolder]);
+
   return (
     <section className="folders-container">
       <header>
@@ -60,6 +80,7 @@ function Folders() {
           <form className="nav-bar-new-folder" onSubmit={handleCreateFolder}>
             <img src={folderIcon} />
             <input
+              autoFocus
               type="text"
               placeholder="نام پوشه"
               onChange={handleChangeInput}
