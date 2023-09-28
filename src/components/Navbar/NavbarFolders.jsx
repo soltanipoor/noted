@@ -48,22 +48,22 @@ function Folders() {
 
   useEffect(() => {
     const handleClick = (event) => {
-      const isClickInForm = event.target.closest(
-        ".nav-bar-new-folder,header"
-      );
+      const isClickInForm = event.target.closest(".nav-bar-new-folder,header");
 
       if (!isClickInForm) {
         setIsShowNewFolder(false);
       }
-    }
+    };
 
     if (isShowNewFolder) {
-      document.body.addEventListener("click", handleClick);
+      setTimeout(() => {
+        document.body.addEventListener("click", handleClick);
+      }, 0)
     }
 
     return () => {
-      document.body.removeEventListener("click", handleClick)
-    }
+      document.body.removeEventListener("click", handleClick);
+    };
   }, [isShowNewFolder]);
 
   return (
