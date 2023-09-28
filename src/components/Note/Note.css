@@ -95,4 +95,5 @@
 
 .note-form__content textarea:focus {
   outline: none;
+  background-color: rgba(0, 0, 0, 0.025);
 }
