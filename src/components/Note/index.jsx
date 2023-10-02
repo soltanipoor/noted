@@ -12,13 +12,8 @@ function Note() {
 
   return (
     <div id="note">
-      {selectedNoteId === 0 ? (
-        <NoteForm />
-      ) : selectedNote ? (
-        <NoteForm
-          note={selectedNote}
-          onUpdate={(value) => updateNote(value)}
-        />
+      {selectedNoteId == 0 || selectedNote ? (
+        <NoteForm note={selectedNote} onUpdate={updateNote} />
       ) : (
         <EmptyNote />
       )}

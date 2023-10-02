@@ -5,7 +5,13 @@ const NoteForm = ({ note, onUpdate }) => {
   return (
     <div className="note-form">
       <div className="note-form__header">
-        <div className="note-form__header__title">{note ? note.title : ""}</div>
+        <div className="note-form__header__title">
+          <input
+            value={note ? note.title : ""}
+            placeholder="عنوان یادداشت خود را وارد نمایید"
+            onChange={(e) => onUpdate('title', e.target.value)}
+            />
+        </div>
       </div>
 
       <div className="note-form__details">
@@ -27,7 +33,8 @@ const NoteForm = ({ note, onUpdate }) => {
       <div className="note-form__content">
         <textarea
           value={note ? note.description : ""}
-          onChange={(e) => onUpdate(e.target.value)}
+          placeholder="هر آنچه که دل تنگت می‌خواهد بنویس ..."
+          onChange={(e) => onUpdate('description', e.target.value)}
         />
       </div>
     </div>

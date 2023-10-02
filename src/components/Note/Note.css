@@ -41,11 +41,23 @@
 }
 
 .note-form__header__title {
+  width: 100%;
+}
+
+.note-form__header__title input {
+  width: 100%;
   color: #000;
+  border: none;
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  background-color: transparent;
+}
+
+.note-form__header__title input:focus {
+  outline: none;
+  background-color: rgba(0, 0, 0, 0.025);
 }
 
 .note-form__details {

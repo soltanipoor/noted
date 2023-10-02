@@ -53,24 +53,40 @@ const initialNotes = [
 ];
 
 function NoteProvider({ children }) {
-  const [notes, setNotes] = useState(initialNotes)
+  const [notes, setNotes] = useState(initialNotes);
   const [selectedNoteId, setSelectedNoteId] = useState(null);
-  
+
   const toggleNewNoteMode = () => {
-    setSelectedNoteId(selectedNoteId === 0 ? null : 0)
+    setSelectedNoteId(selectedNoteId === 0 ? null : 0);
   };
 
-  const updateNote = (newDescription) => {
-    const newNotes = notes.map((item) => {
-      if (item.id !== selectedNoteId) {
-        return item
-      } else {
-        item.description = newDescription
-        return item
-      }
-    })
-    setNotes(newNotes)
-  }
+  const updateNote = (key, newValue) => {
+    if (selectedNoteId === 0) {
+      const newNote = {
+        id: notes.length + 1,
+        [key]: newValue,
+        date: new Date().toLocaleDateString("fa-IR", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        }),
+        color: "#000000",
+      };
+
+      setNotes([...notes, newNote]);
+      setSelectedNoteId(notes.length + 1);
+    } else {
+      const newNotes = notes.map((item) => {
+        if (item.id !== selectedNoteId) {
+          return item;
+        } else {
+          item[key] = newValue;
+          return item;
+        }
+      });
+      setNotes(newNotes);
+    }
+  };
 
   const value = {
     notes,
@@ -80,11 +96,7 @@ function NoteProvider({ children }) {
     toggleNewNoteMode,
   };
 
-  return (
-    <noteContext.Provider value={value}>
-      {children}
-    </noteContext.Provider>
-    );
+  return <noteContext.Provider value={value}>{children}</noteContext.Provider>;
 }
 
 export { NoteProvider, noteContext };
