@@ -4,15 +4,17 @@ import EmptyNote from "./EmptyNote";
 import { noteContext } from "@/providers/NoteProvider";
 
 import "./Note.css";
+import { useParams } from "react-router-dom";
 
 function Note() {
-  const { notes, selectedNoteId, updateNote } = useContext(noteContext);
+  const { noteId } = useParams();
+  const { notes, updateNote } = useContext(noteContext);
 
-  const selectedNote = notes.find((n) => n.id === selectedNoteId);
+  const selectedNote = notes.find((n) => n.id == noteId);
 
   return (
     <div id="note">
-      {selectedNoteId == 0 || selectedNote ? (
+      {noteId == 0 || selectedNote ? (
         <NoteForm note={selectedNote} onUpdate={updateNote} />
       ) : (
         <EmptyNote />

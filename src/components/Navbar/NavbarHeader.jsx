@@ -1,11 +1,14 @@
 import Logo from "@/assets/images/logo.svg";
 import PlusIcon from "@/assets/images/icons/plus.svg";
+import { useNavigate } from "react-router-dom";
 import SearchIcon from "@/assets/images/icons/search.svg";
-import { useContext } from "react";
-import { noteContext } from "@/providers/NoteProvider";
 
 const NavBarHeader = () => {
-  const { toggleNewNoteMode } = useContext(noteContext);
+  const navigate = useNavigate();
+
+  const toggleNewNoteMode = () => {
+    navigate("/note/0");
+  };
 
   return (
     <header>

@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 const noteContext = createContext();
 
@@ -53,15 +54,15 @@ const initialNotes = [
 ];
 
 function NoteProvider({ children }) {
-  const [notes, setNotes] = useState(initialNotes);
-  const [selectedNoteId, setSelectedNoteId] = useState(null);
-
-  const toggleNewNoteMode = () => {
-    setSelectedNoteId(selectedNoteId === 0 ? null : 0);
-  };
+  const { noteId } = useParams();
+  const navigate = useNavigate();
+  const [notes, setNotes] = useState(() => {
+    const localData = localStorage.getItem("noted-notes");
+    return localData ? JSON.parse(localData) : initialNotes;
+  });
 
   const updateNote = (key, newValue) => {
-    if (selectedNoteId === 0) {
+    if (noteId == 0) {
       const newNote = {
         id: notes.length + 1,
         [key]: newValue,
@@ -73,11 +74,13 @@ function NoteProvider({ children }) {
         color: "#000000",
       };
 
-      setNotes([...notes, newNote]);
-      setSelectedNoteId(notes.length + 1);
+      const newNotes = [...notes, newNote];
+      setNotes(newNotes);
+      localStorage.setItem("noted-notes", JSON.stringify(newNotes));
+      navigate(`/note/${newNote.id}`);
     } else {
       const newNotes = notes.map((item) => {
-        if (item.id !== selectedNoteId) {
+        if (item.id != noteId) {
           return item;
         } else {
           item[key] = newValue;
@@ -85,15 +88,13 @@ function NoteProvider({ children }) {
         }
       });
       setNotes(newNotes);
+      localStorage.setItem("noted-notes", JSON.stringify(newNotes));
     }
   };
 
   const value = {
     notes,
     updateNote,
-    selectedNoteId,
-    setSelectedNoteId,
-    toggleNewNoteMode,
   };
 
   return <noteContext.Provider value={value}>{children}</noteContext.Provider>;
