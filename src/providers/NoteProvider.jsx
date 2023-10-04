@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const noteContext = createContext();
@@ -55,6 +55,7 @@ const initialNotes = [
 
 function NoteProvider({ children }) {
   const { noteId } = useParams();
+  const [searchTerm, setSearchTerm] = useState();
   const navigate = useNavigate();
   const [notes, setNotes] = useState(() => {
     const localData = localStorage.getItem("noted-notes");
@@ -92,9 +93,17 @@ function NoteProvider({ children }) {
     }
   };
 
+  const filteredNotes = useMemo(() => {
+    return searchTerm
+      ? notes.filter((note) => note.title?.includes(searchTerm))
+      : notes;
+  }, [notes, searchTerm]);
+
   const value = {
-    notes,
+    notes: filteredNotes,
+    searchTerm,
     updateNote,
+    setSearchTerm,
   };
 
   return <noteContext.Provider value={value}>{children}</noteContext.Provider>;

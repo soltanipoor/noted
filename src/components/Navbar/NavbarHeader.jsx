@@ -1,26 +1,40 @@
 import Logo from "@/assets/images/logo.svg";
 import PlusIcon from "@/assets/images/icons/plus.svg";
-import { useNavigate } from "react-router-dom";
 import SearchIcon from "@/assets/images/icons/search.svg";
+import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { noteContext } from "@/providers/NoteProvider";
 
 const NavBarHeader = () => {
-  const navigate = useNavigate();
-
-  const toggleNewNoteMode = () => {
-    navigate("/note/0");
-  };
+  const [isShowSearchInput, setIsShowSearchInput] = useState(false);
+  const { setSearchTerm } = useContext(noteContext);
 
   return (
     <header>
-      <img src={Logo} />
-      <button className="search-button">
+      <Link to="/">
+        <img src={Logo} />
+      </Link>
+
+      <button
+        className="search-button"
+        onClick={() => setIsShowSearchInput(!isShowSearchInput)}
+      >
         <img src={SearchIcon} />
       </button>
 
-      <button className="new-note-button" onClick={() => toggleNewNoteMode()}>
+      {isShowSearchInput && (
+        <input
+          autoFocus
+          className="search-input"
+          placeholder="جستجو"
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      )}
+
+      <Link to="/note/0" className="new-note-button">
         <img src={PlusIcon} />
         یادداشت جدید
-      </button>
+      </Link>
     </header>
   );
 };

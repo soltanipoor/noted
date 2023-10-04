@@ -9,8 +9,8 @@ const NoteForm = ({ note, onUpdate }) => {
           <input
             value={note ? note.title : ""}
             placeholder="عنوان یادداشت خود را وارد نمایید"
-            onChange={(e) => onUpdate('title', e.target.value)}
-            />
+            onChange={(e) => onUpdate("title", e.target.value)}
+          />
         </div>
       </div>
 
@@ -21,20 +21,22 @@ const NoteForm = ({ note, onUpdate }) => {
           <div className="note-form__details__value">شخصی</div>
         </div>
 
-        <div className="note-form__details__item">
-          <img src={calenderIcon} />
-          <div className="note-form__details__title">زمان ایجاد</div>
-          <div className="note-form__details__value">
-            {note ? note.date : ""}
+        {note && (
+          <div className="note-form__details__item">
+            <img src={calenderIcon} />
+            <div className="note-form__details__title">زمان ایجاد</div>
+            <div className="note-form__details__value">
+              {note.date}
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className="note-form__content">
         <textarea
           value={note ? note.description : ""}
           placeholder="هر آنچه که دل تنگت می‌خواهد بنویس ..."
-          onChange={(e) => onUpdate('description', e.target.value)}
+          onChange={(e) => onUpdate("description", e.target.value)}
         />
       </div>
     </div>
